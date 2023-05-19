@@ -8,9 +8,17 @@ import httpRequest from "./axios";
  * @param type (取值:-1:全部 1:男歌手 2:女歌手 3:乐队)
  * @param area (取值: -1:全部 7华语 96欧美 8:日本 16韩国 0:其他)
  */
-export function getQrKey() {
-    return httpRequest({
-        url: "/login/qr/key",
-        method: "get",
-    });
+export function getQrKey(limit: any, offset: any, type: any, area: any) {
+  return httpRequest({
+    url:
+      "/artist/list?limit=" +
+      limit +
+      "&offset=" +
+      offset +
+      "&type=" +
+      type +
+      "&area" +
+      area,
+    method: "get",
+  });
 }

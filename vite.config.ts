@@ -3,9 +3,12 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import electron from "vite-plugin-electron";
 import renderer from "vite-plugin-electron-renderer";
-import { resolve } from 'path'
+import { resolve } from "path";
 import pkg from "./package.json";
-const srcPath = resolve(__dirname, 'src')
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+const srcPath = resolve(__dirname, "src");
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
@@ -70,13 +73,19 @@ export default defineConfig(({ command }) => {
           },
         },
       ]),
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
       // Use Node.js API in the Renderer-process
       renderer(),
     ],
     server: {
       proxy: {
         "/api": {
-          target: "https://monfils.eu.org/",
+          target: "localhost:3000",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
         },
