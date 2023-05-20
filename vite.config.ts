@@ -85,7 +85,7 @@ export default defineConfig(({ command }) => {
     server: {
       proxy: {
         "/api": {
-          target: "localhost:3000",
+          target: "https://monfils.eu.org/",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
         },

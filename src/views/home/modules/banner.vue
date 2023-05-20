@@ -30,6 +30,19 @@ onMounted(render);
           </div>
         </template>
       </el-image>
+      <el-skeleton
+        animated
+        style="--el-skeleton-circle-size: 100px"
+        :throttle="500"
+        v-if="(banners.length === 0)"
+      >
+        <template #template>
+          <el-skeleton-item
+            variant="image"
+            style="width: 100%; height: 200px"
+          />
+        </template>
+      </el-skeleton>
     </el-carousel-item>
   </el-carousel>
 </template>
